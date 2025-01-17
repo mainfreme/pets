@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Service\PetService;
+use App\Services\PetService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
