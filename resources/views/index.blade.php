@@ -23,7 +23,7 @@
                 <tr>
                     <td>
                         @forelse ($item['photoUrls'] as $photoUrl)
-                            @if (app(\App\Service\PetService::class)->urlFileExists($photoUrl))
+                            @if (app(\App\Services\PetService::class)->urlFileExists($photoUrl))
                                 <img src="{{ $photoUrl }}" style="width: 50px; max-width: 50px; max-height: 50px;"/>
                             @endif
                         @empty
@@ -40,13 +40,18 @@
                         @endforelse
                     </td>
                     <td>
-                        <a href="?id={{ $item['id'] }}">Zobacz</a>
+                        <a href="{{ route('pets.show', ['petId' => $item['id']]) }}">Zobacz</a>
                     </td>
                     <td>
-                        <a href="?id={{ $item['id'] }}">Edytuj</a>
+                        <a href="{{ route('pets.edit', ['petId' => $item['id']]) }}">Edytuj</a>
                     </td>
                     <td>
-                        <a href="?id={{ $item['id'] }}">Usun</a>
+                        <form action="{{ route('pets.delete', ['petId' => $item['id']]) }}" method="POST"
+                              style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Usuń</button>
+                        </form>
                     </td>
                 </tr>
             @endif
