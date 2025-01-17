@@ -19,8 +19,27 @@
             <li><a href="{{ route('pets.index', ['status' => Status::AVAILABLE->value]) }}">Lista zwierząt dostępnych</a></li>
             <li><a href="{{ route('pets.index', ['status' => Status::PENDING->value]) }}">Lista zwierząt oczekujących</a></li>
             <li><a href="{{ route('pets.index', ['status' => Status::SOLD->value]) }}">Lista zwierząt sprzedanych</a></li>
+            <li><a href="{{ route('pets.create') }}">Dodaj nowego zwierzaka</a></li>
         </ul>
     </nav>
+
+    <div>
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    </div>
 
     <main>
         <div class="container mt-5">
